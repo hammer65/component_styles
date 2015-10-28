@@ -1,0 +1,17 @@
+{
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jquery": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+  },
+  "globals": {
+    "jQuery": true,
+    "$": true
+  }
+}
