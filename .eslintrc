@@ -12,6 +12,7 @@
     "react"
   ],
   "rules": {
+    "react/jsx-uses-react": 1
   },
   "globals": {
     "jQuery": true,
