@@ -20,6 +20,7 @@ var config = {
     css: [
       'node_modules/bootstrap/dist/css/bootstrap.min.css',
       'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+      'src/stylesheets/base.css',
       'src/stylesheets/epic.css'
     ],
     dist: './dist',
