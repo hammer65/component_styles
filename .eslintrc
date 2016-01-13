@@ -4,8 +4,8 @@
   },
   "env": {
     "browser": true,
-    "node": true,
-    "jquery": true
+    "jquery": true,
+    "node": true
   },
   "extends": "eslint:recommended",
   "plugins": [

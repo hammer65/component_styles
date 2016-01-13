@@ -63,6 +63,7 @@ td {
   border-top: none !important;
 }
 
+/* decrease the spacing between columns on the quotes area view */
 .quotes-grid .col-xs-12,
 .quotes-grid .col-sm-6 {
   padding-left: 5px;

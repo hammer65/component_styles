@@ -8,7 +8,7 @@ var Col = require('react-bootstrap/lib/Col');
 
 var QuoteSummary = React.createClass({
   propType: {
-    quote: React.PropTypes.object
+    quote: React.PropTypes.object.isRequired
   },
 
   render: function() {

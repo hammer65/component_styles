@@ -91,12 +91,6 @@ var QuotesView = React.createClass({
     return { selectedQuote: null };
   },
 
-  addData: function() {
-    quotes = [];
-  },
-
-  clearData: function() {},
-
   selectQuote: function(id) {
     this.setState({
       selectedQuote: _.find(quotes, { id: id })
