@@ -28,7 +28,7 @@ var config = {
   }
 };
 
-// Start a local development server
+// start a local development server
 gulp.task('connect', function() {
   connect.server({
     root: ['dist'],
@@ -38,17 +38,21 @@ gulp.task('connect', function() {
   });
 });
 
+// open the index page for the app
 gulp.task('open', ['connect'], function() {
   return gulp.src('dist/index.html')
              .pipe(open({ uri: config.devBaseUrl + ':' + config.port + '/'}));
 });
 
+// copy html from the src to the dist dir and trigger a reload
 gulp.task('html', function() {
   return gulp.src(config.paths.html)
              .pipe(gulp.dest(config.paths.dist))
              .pipe(connect.reload());
 });
 
+// transform jsx files into javascript, resolve require() calls for the browser,
+// and bundle into 1 .js file.  copy to dist and reload the browser.
 gulp.task('js', function() {
   browserify(config.paths.mainJs)
     .transform(reactify)
@@ -59,6 +63,7 @@ gulp.task('js', function() {
     .pipe(connect.reload());
 });
 
+// bundle css files into 1 bundle.css file and copy to dist
 gulp.task('css', function() {
   gulp.src(config.paths.css)
       .pipe(concat('bundle.css'))
@@ -66,26 +71,28 @@ gulp.task('css', function() {
       .pipe(connect.reload());
 });
 
-// Migrates images to dist dolfder
-// Note that I could even optimize images here
+// copy images to dist, note that we could optimize images here
 gulp.task('images', function() {
   gulp.src(config.paths.images)
       .pipe(gulp.dest(config.paths.dist + '/images'))
       .pipe(connect.reload());
 });
 
+// lint all javascript
 gulp.task('lint', function() {
   return gulp.src(config.paths.js)
              .pipe(eslint('.eslintrc'))
              .pipe(eslint.format());
 });
 
+// watch for file changes, and run tasks when files change
 gulp.task('watch', function() {
   gulp.watch(config.paths.html, ['html']);
   gulp.watch(config.paths.js, ['lint', 'js']);
   gulp.watch(config.paths.css, ['css']);
 });
 
+// task that is run by default
 gulp.task('default', [
   'lint',   // check javascript code for common mistakes
   'html',   // move html to dist/
