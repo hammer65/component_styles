@@ -4,20 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+   "collectCoverage": true,
+   "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/fbjs"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "browserify": "^12.0.0",
-    "eslint-plugin-react": "^3.6.3",
     "flux": "^2.1.1",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-connect": "^2.2.0",
-    "gulp-eslint": "^1.0.0",
-    "gulp-open": "^1.0.0",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
@@ -25,7 +27,20 @@
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.1",
     "react-router": "^1.0.0-rc3",
-    "react-router-bootstrap": "^0.19.3",
+    "react-router-bootstrap": "^0.19.3"
+  },
+  "devDependencies": {
+    "browserify": "^12.0.0",
+    "eslint-plugin-react": "^3.6.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-open": "^1.0.0",
+    "gulp-shell": "^0.5.1",
+    "jest-cli": "^0.8.2",
+    "react": "^0.14.6",
+    "react-addons-test-utils": "^0.14.6",
     "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0"
   }

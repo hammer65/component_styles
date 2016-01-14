@@ -7,6 +7,7 @@ var gulp       = require('gulp'),
     open       = require('gulp-open'),    // Opens a URL in a web browser
     browserify = require('browserify'),   // Bundles JS
     reactify   = require('reactify'),     // Transforms React JSX to JS
+    shell      = require('gulp-shell'),   // Command line interface for gulp
     source     = require('vinyl-source-stream'); // Use conventional text
                                                  // streams in Gulp
 
@@ -24,7 +25,8 @@ var config = {
       'src/stylesheets/epic.css'
     ],
     dist: './dist',
-    mainJs: './src/main.js'
+    mainJs: './src/main.js',
+    tests: './src/**/__tests__/*.js'
   }
 };
 
@@ -85,11 +87,17 @@ gulp.task('lint', function() {
              .pipe(eslint.format());
 });
 
+gulp.task('test', shell.task('npm test', {
+  // So our task doesn't error out when a test fails
+  ignoreErrors: true
+}));
+
 // watch for file changes, and run tasks when files change
 gulp.task('watch', function() {
   gulp.watch(config.paths.html, ['html']);
   gulp.watch(config.paths.js, ['lint', 'js']);
   gulp.watch(config.paths.css, ['css']);
+  gulp.watch([config.paths.js, config.paths.tests], ['test'])
 });
 
 // task that is run by default
@@ -100,5 +108,6 @@ gulp.task('default', [
   'css',    // bundle css to dist/css
   'images', // move images to dist/images
   'open',   // open the app in the browser
+  'test',   // run the test suite
   'watch'   // watch for html and js changes, process them, and reload the app
 ]);
