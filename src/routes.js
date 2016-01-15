@@ -1,17 +1,16 @@
-"use strict";
-
-var React = require('react');
-
-var Router = require('react-router');
-var IndexRoute = Router.IndexRoute;
-var Route = Router.Route;
+import React from 'react';
+import {IndexRoute, Route} from 'react-router';
+import App from './components/app';
+import QuotesView from './components/quotes/quotesView';
+import QuoteForm from './components/quote/quoteForm';
+import NotFoundPage from './components/notFoundPage';
 
 var routes = (
-  <Route path="/" component={require('./components/app')}>
-    <IndexRoute component={require('./components/quotes/quotesView')} />
-    <Route path="quote" component={require('./components/quote/quoteForm')} />
-    <Route path="*" component={require('./components/notFoundPage')} />
+  <Route path="/" component={App}>
+    <IndexRoute component={QuotesView} />
+    <Route path="quote" component={QuoteForm} />
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );
 
-module.exports = routes;
+export default routes;

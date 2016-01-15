@@ -1,24 +1,16 @@
-"use strict";
+import React from 'react';
+import moment from 'moment';
 
-var React = require('react');
-var moment = require('moment');
-
-var QuoteRow = React.createClass({
-  propTypes: {
-    quote: React.PropTypes.object.isRequired,
-    onSelect: React.PropTypes.func.isRequired
-  },
-
-  onRowSelected: function() {
+class QuoteRow extends React.Component {
+  onRowSelected() {
     this.props.onSelect(this.props.quote.id);
-  },
-
-  render: function() {
+  }
+  render() {
     var quote = this.props.quote,
         trClass = this.props.selected ? 'selected' : '';
 
     return (
-      <tr onClick={this.onRowSelected} className={trClass}>
+      <tr onClick={this.onRowSelected.bind(this)} className={trClass}>
         <td>{quote.line}</td>
         <td>{quote.status}</td>
         <td>{moment(quote.effectiveDate).format('MM/DD/YYYY')}</td>
@@ -29,6 +21,10 @@ var QuoteRow = React.createClass({
       </tr>
     );
   }
-});
+}
+QuoteRow.propTypes = {
+  quote: React.PropTypes.object.isRequired,
+  onSelect: React.PropTypes.func.isRequired
+};
 
-module.exports = QuoteRow;
+export default QuoteRow;

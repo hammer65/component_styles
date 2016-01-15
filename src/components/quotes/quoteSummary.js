@@ -1,17 +1,10 @@
-"use strict";
+import React from 'react';
+import DetailBox from './detailBox';
+import QuoteDetails from './quoteDetails';
+import {Row, Col} from 'react-bootstrap';
 
-var React = require('react');
-var DetailBox = require('./detailBox');
-var QuoteDetails = require('./quoteDetails');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-
-var QuoteSummary = React.createClass({
-  propType: {
-    quote: React.PropTypes.object.isRequired
-  },
-
-  render: function() {
+class QuoteSummary extends React.Component {
+  render() {
     return (
       <Row>
         <Col xs={12} sm={6}>
@@ -29,6 +22,9 @@ var QuoteSummary = React.createClass({
       </Row>
     );
   }
-});
+}
+QuoteSummary.propTypes = {
+  quote: React.PropTypes.object.isRequired
+};
 
-module.exports = QuoteSummary;
+export default QuoteSummary;

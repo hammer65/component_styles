@@ -1,13 +1,7 @@
-"use strict";
+import React from 'react';
 
-var React = require('react');
-
-var QuoteDetail = React.createClass({
-  propType: {
-    label: React.PropTypes.string.isRequired
-  },
-
-  render: function() {
+class QuoteDetail extends React.Component {
+  render() {
     return (
       <div className="row" style={{margin: '5px 0'}}>
         <div className="col-xs-2" style={{textAlign: 'right'}}>
@@ -19,6 +13,9 @@ var QuoteDetail = React.createClass({
       </div>
     );
   }
-});
+}
+QuoteDetail.propTypes = {
+  label: React.PropTypes.string.isRequired
+};
 
-module.exports = QuoteDetail;
+export default QuoteDetail;

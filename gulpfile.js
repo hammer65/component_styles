@@ -6,7 +6,6 @@ var gulp       = require('gulp'),
     eslint     = require('gulp-eslint'),  // Lint JS files, including JSX
     open       = require('gulp-open'),    // Opens a URL in a web browser
     browserify = require('browserify'),   // Bundles JS
-    reactify   = require('reactify'),     // Transforms React JSX to JS
     shell      = require('gulp-shell'),   // Command line interface for gulp
     source     = require('vinyl-source-stream'); // Use conventional text
                                                  // streams in Gulp
@@ -57,7 +56,7 @@ gulp.task('html', function() {
 // and bundle into 1 .js file.  copy to dist and reload the browser.
 gulp.task('js', function() {
   browserify(config.paths.mainJs)
-    .transform(reactify)
+    .transform('babelify', {presets: ['es2015', 'react']})
     .bundle()
     .on('error', console.error.bind(console))
     .pipe(source('bundle.js'))

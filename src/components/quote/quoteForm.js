@@ -1,16 +1,8 @@
-"use strict";
+import React from 'react';
+import {PageHeader, Grid, Row, Col, Tabs, Tab, Input} from 'react-bootstrap';
 
-var React = require('react');
-var Grid = require('react-bootstrap/lib/Grid');
-var PageHeader = require('react-bootstrap/lib/PageHeader');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var Tabs = require('react-bootstrap/lib/Tabs');
-var Tab = require('react-bootstrap/lib/Tab');
-var Input = require('react-bootstrap/lib/Input');
-
-var QuoteForm = React.createClass({
-  render: function() {
+class QuoteForm extends React.Component {
+  render() {
     return (
       <div style={{padding: '0px 5px'}}>
         <PageHeader>New Quote</PageHeader>
@@ -82,6 +74,6 @@ var QuoteForm = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = QuoteForm;
+export default QuoteForm;

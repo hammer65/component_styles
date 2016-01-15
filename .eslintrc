@@ -1,6 +1,8 @@
 {
   "ecmaFeatures": {
-    "jsx": true
+    "classes": true,
+    "jsx": true,
+    "modules": true
   },
   "env": {
     "browser": true,

@@ -1,10 +1,8 @@
-"use strict";
+import React from 'react';
+import {Panel} from 'react-bootstrap';
 
-var React = require('react');
-var Panel = require('react-bootstrap/lib/Panel');
-
-var DetailBox = React.createClass({
-  render: function() {
+class DetailBox extends React.Component {
+  render() {
     var title = <h3>{this.props.title}</h3>
     return (
       <Panel header={title}>
@@ -12,6 +10,6 @@ var DetailBox = React.createClass({
       </Panel>
     );
   }
-});
+}
 
-module.exports = DetailBox;
+export default DetailBox;

@@ -1,9 +1,7 @@
-"use strict";
+import React from 'react';
 
-var React = require('react');
-
-var DiscoveredPerson = React.createClass({
-  render: function() {
+class DiscoveredPerson extends React.Component {
+  render() {
     var tableStyle = {
       border: '1px solid grey'
     };
@@ -39,14 +37,14 @@ var DiscoveredPerson = React.createClass({
       </div>
     );
   }
-});
+}
 
-var Discovery = React.createClass({
-  render: function() {
+class Discovery extends React.Component {
+  render() {
     return (
       <DiscoveredPerson/>
     );
   }
-});
+}
 
-module.exports = Discovery;
+export default Discovery;

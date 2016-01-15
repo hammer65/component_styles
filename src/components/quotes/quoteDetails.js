@@ -1,14 +1,8 @@
-"use strict";
+import React from 'react';
+import QuoteDetail from './quoteDetail';
 
-var React = require('react');
-var QuoteDetail = require('./quoteDetail');
-
-var QuoteDetails = React.createClass({
-  propType: {
-    quote: React.PropTypes.object
-  },
-
-  render: function() {
+class QuoteDetails extends React.Component {
+  render() {
     var quote = this.props.quote;
     var coApp = quote.coApplicant ?
       <QuoteDetail label="Co-Applicant">
@@ -50,6 +44,9 @@ var QuoteDetails = React.createClass({
       </div>
     );
   }
-});
+}
+QuoteDetails.propTypes = {
+  quote: React.PropTypes.object
+};
 
-module.exports = QuoteDetails;
+export default QuoteDetails;

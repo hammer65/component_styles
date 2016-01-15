@@ -1,16 +1,9 @@
-"use strict";
-
-var React = require('react');
-var _ = require('lodash');
-var Grid = require('react-bootstrap/lib/Grid');
-var PageHeader = require('react-bootstrap/lib/PageHeader');
-var Row = require('react-bootstrap/lib/Row');
-var Col = require('react-bootstrap/lib/Col');
-var DropdownButton = require('react-bootstrap/lib/DropdownButton');
-var MenuItem = require('react-bootstrap/lib/MenuItem');
-var LinkContainer = require('react-router-bootstrap').LinkContainer;
-var QuoteSummary = require('./quoteSummary');
-var QuotesTable = require('./quotesTable');
+import React from 'react';
+import _ from 'lodash';
+import {PageHeader, Grid, Row, Col, DropdownButton, MenuItem} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
+import QuoteSummary from './quoteSummary';
+import QuotesTable from './quotesTable';
 
 var quotes = [
   {
@@ -86,18 +79,17 @@ var quotes = [
   }
 ];
 
-var QuotesView = React.createClass({
-  getInitialState: function() {
-    return { selectedQuote: null };
-  },
-
-  selectQuote: function(id) {
+class QuotesView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedQuote: null };
+  }
+  selectQuote(id) {
     this.setState({
       selectedQuote: _.find(quotes, { id: id })
     });
-  },
-
-  render: function() {
+  }
+  render() {
     var quoteSummary = this.state.selectedQuote ?
                     <QuoteSummary quote={this.state.selectedQuote} /> :
                     '';
@@ -117,7 +109,7 @@ var QuotesView = React.createClass({
               <QuotesTable
                 quotes={quotes}
                 selectedQuote={this.state.selectedQuote}
-                onSelect={this.selectQuote}/>
+                onSelect={this.selectQuote.bind(this)}/>
             </div>
           </Col>
         </Row>
@@ -125,6 +117,6 @@ var QuotesView = React.createClass({
       </Grid>
     );
   }
-});
+}
 
-module.exports = QuotesView;
+export default QuotesView;

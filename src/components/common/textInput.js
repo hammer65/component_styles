@@ -1,18 +1,7 @@
-"use strict";
+import React from 'react';
 
-var React = require('react');
-
-var TextInput = React.createClass({
-  propTypes: {
-    name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
-    value: React.PropTypes.string,
-    error: React.PropTypes.string
-  },
-
-  render: function() {
+class TextInput extends React.Component {
+  render() {
     var wrapperClass = 'form-group';
     if (this.props.error && this.props.error.length > 0) {
       wrapperClass += ' ' + 'has-error';
@@ -34,6 +23,14 @@ var TextInput = React.createClass({
       </div>
     );
   }
-});
+}
+TextInput.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  label: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  placeholder: React.PropTypes.string,
+  value: React.PropTypes.string,
+  error: React.PropTypes.string
+};
 
-module.exports = TextInput;
+export default TextInput;

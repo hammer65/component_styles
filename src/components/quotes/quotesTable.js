@@ -1,17 +1,10 @@
-"use strict";
+import React from 'react';
+import _ from 'lodash';
+import QuoteRow from './quoteRow';
+import NoItemsRow from './noItemsRow';
 
-var React = require('react');
-var _ = require('lodash');
-var QuoteRow = require('./quoteRow');
-var NoItemsRow = require('./noItemsRow');
-
-var QuotesTable = React.createClass({
-  propTypes: {
-    quotes: React.PropTypes.array.isRequired,
-    onSelect: React.PropTypes.func.isRequired
-  },
-
-  render: function() {
+class QuotesTable extends React.Component {
+  render() {
     var quotes = this.props.quotes,
         rows = quotes.length > 0 ?
                  _.map(quotes, function(quote) {
@@ -43,6 +36,10 @@ var QuotesTable = React.createClass({
       </div>
     );
   }
-});
+}
+QuotesTable.propTypes = {
+  quotes: React.PropTypes.array.isRequired,
+  onSelect: React.PropTypes.func.isRequired
+};
 
-module.exports = QuotesTable;
+export default QuotesTable;

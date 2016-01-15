@@ -1,7 +1,5 @@
-"use strict";
+import keyMirror from 'react/lib/keyMirror';
 
-var keyMirror = require('react/lib/keyMirror');
-
-module.exports = keyMirror({
+export default keyMirror({
   NEW_AUTO: null
 });
