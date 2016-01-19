@@ -2,8 +2,19 @@
 
 React.js frontend for the Quote Service
 
-## Getting Started
+## Installation
  
-1.  Install Node.js 4.x
-2.  npm install gulp -g
-3.  cd REPO_ROOT/ && npm install
+* ```git clone <repository-url>``` this repository
+* Install Node.js 4.x
+* ```npm install gulp -g```
+* change into the new directory
+* ```npm install```
+
+## Running Tests
+
+* ```gulp test``` for one time test run
+* ```gulp``` for tdd
+
+## Building
+
+* ```gulp```
