@@ -1,14 +1,12 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
 import App from './components/app';
-import QuotesView from './components/quotes/quotesView';
-import QuoteForm from './components/quote/quoteForm';
 import NotFoundPage from './components/notFoundPage';
+import Index from './components/index';
 
 var routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={QuotesView} />
-    <Route path="quote" component={QuoteForm} />
+    <IndexRoute component={Index} />
     <Route path="*" component={NotFoundPage} />
   </Route>
 );

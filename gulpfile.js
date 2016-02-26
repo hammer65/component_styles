@@ -107,6 +107,6 @@ gulp.task('default', [
   'css',    // bundle css to dist/css
   'images', // move images to dist/images
   'open',   // open the app in the browser
-  'test',   // run the test suite
+ // 'test',   // run the test suite
   'watch'   // watch for html and js changes, process them, and reload the app
 ]);
