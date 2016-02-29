@@ -2,14 +2,14 @@ import React from 'react';
 import {UiStyle} from './ui_styles_epic';
 import Radium from 'radium';
 
-class Grid extends React.Component{
+class TitleBox extends React.Component{
   render(){
     return (
-      <div style={UiStyle.styles.grid}>
-        {this.props.children}
+      <div>
+
       </div>
     );
   }
 }
 
-export default Radium(Grid);
+export default Radium(TitleBox);

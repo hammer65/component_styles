@@ -1,11 +1,11 @@
 import React from 'react';
-import UiStyle from './ui-theme_epic';
+import {UiStyle} from './ui_styles_epic';
 import Radium from 'radium';
 
 class GridBoxBody extends React.Component{
   render(){
     return (
-      <div style={UiStyle.gridBoxBody}>
+      <div style={UiStyle.styles.gridBoxBody}>
         {this.props.children}
       </div>
     );

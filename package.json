@@ -22,6 +22,7 @@
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
     "bootstrap": "^3.3.5",
+    "fixed-data-table": "^0.6.0",
     "flux": "^2.1.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",

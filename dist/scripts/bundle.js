@@ -1768,7 +1768,7 @@ exports.stringify = function (obj) {
 		}
 
 		if (Array.isArray(val)) {
-			return val.sort().map(function (val2) {
+			return val.slice().sort().map(function (val2) {
 				return strictUriEncode(key) + '=' + strictUriEncode(val2);
 			}).join('&');
 		}
@@ -2206,7 +2206,7 @@ var Style = _react2.default.createClass({
     }
 
     var styles = this._buildStyles(this.props.rules);
-    console.log(styles);
+
     return _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: styles } });
   }
 });
@@ -26351,6 +26351,22 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _radium = require('radium');
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _stage = require('./stage');
+
+var _stage2 = _interopRequireDefault(_stage);
+
+var _grid = require('./grid');
+
+var _grid2 = _interopRequireDefault(_grid);
+
+var _navContainer = require('./nav-container');
+
+var _navContainer2 = _interopRequireDefault(_navContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26358,6 +26374,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Tabs = [{
+  text: "Overview",
+  route: "",
+  valid: true
+}, {
+  text: "Quote Info",
+  route: "",
+  valid: true
+}, {
+  text: "Drivers",
+  route: "",
+  valid: false
+}, {
+  text: "Coverages",
+  route: ""
+}, {
+  text: "Incidents",
+  route: ""
+}, {
+  text: "Quote",
+  route: ""
+}];
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -26371,10 +26410,23 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'render',
     value: function render() {
+      var MainStyles = _ui_styles_epic.StyleTags.map(function (T) {
+        return _react2.default.createElement(_radium.Style, { scopeSelector: T.scopeSelector, rules: T.rules });
+      });
       return _react2.default.createElement(
         'div',
         null,
-        this.props.children
+        MainStyles,
+        _react2.default.createElement(
+          _stage2.default,
+          null,
+          _react2.default.createElement(_navContainer2.default, { tabs: Tabs }),
+          _react2.default.createElement(
+            _grid2.default,
+            null,
+            this.props.children
+          )
+        )
       );
     }
   }]);
@@ -26384,7 +26436,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"react":253}],255:[function(require,module,exports){
+},{"./grid":260,"./nav-container":262,"./stage":265,"./ui_styles_epic":266,"radium":36,"react":253}],255:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26397,13 +26449,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ui_styles_epic = require('./ui_styles_epic');
+
 var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
-
-var _stage = require('./stage');
-
-var _stage2 = _interopRequireDefault(_stage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26412,13 +26462,357 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import UiStyle from './ui-theme_epic.js';
 
+var GridBoxBody = function (_React$Component) {
+  _inherits(GridBoxBody, _React$Component);
+
+  function GridBoxBody() {
+    _classCallCheck(this, GridBoxBody);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(GridBoxBody).apply(this, arguments));
+  }
+
+  _createClass(GridBoxBody, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { style: _ui_styles_epic.UiStyle.styles.gridBoxBody },
+        this.props.children
+      );
+    }
+  }]);
+
+  return GridBoxBody;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(GridBoxBody);
+
+},{"./ui_styles_epic":266,"radium":36,"react":253}],256:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GridBoxContent = function (_React$Component) {
+  _inherits(GridBoxContent, _React$Component);
+
+  function GridBoxContent() {
+    _classCallCheck(this, GridBoxContent);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(GridBoxContent).apply(this, arguments));
+  }
+
+  _createClass(GridBoxContent, [{
+    key: 'render',
+    value: function render() {
+      var styles = [_ui_styles_epic.UiStyle.styles.gridBoxContent];
+      if (this.props.hasTable) {
+        styles.push(_ui_styles_epic.UiStyle.styles.gridBoxContentTable);
+      }
+      console.log('blah ', styles);
+      return _react2.default.createElement(
+        'div',
+        { style: styles },
+        this.props.children
+      );
+    }
+  }]);
+
+  return GridBoxContent;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(GridBoxContent);
+
+},{"./ui_styles_epic":266,"radium":36,"react":253}],257:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GridBoxHeader = function (_React$Component) {
+  _inherits(GridBoxHeader, _React$Component);
+
+  function GridBoxHeader() {
+    _classCallCheck(this, GridBoxHeader);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(GridBoxHeader).apply(this, arguments));
+  }
+
+  _createClass(GridBoxHeader, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'header',
+        { style: _ui_styles_epic.UiStyle.styles.gridBoxHeader },
+        _react2.default.createElement(
+          'h1',
+          { style: _ui_styles_epic.UiStyle.styles.gridBoxHeaderH1 },
+          this.props.text
+        )
+      );
+    }
+  }]);
+
+  return GridBoxHeader;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(GridBoxHeader);
+
+},{"./ui_styles_epic":266,"radium":36,"react":253}],258:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _gridBoxHeader = require('./grid-box-header');
+
+var _gridBoxHeader2 = _interopRequireDefault(_gridBoxHeader);
+
+var _gridBoxBody = require('./grid-box-body');
+
+var _gridBoxBody2 = _interopRequireDefault(_gridBoxBody);
+
+var _gridBoxContent = require('./grid-box-content');
+
+var _gridBoxContent2 = _interopRequireDefault(_gridBoxContent);
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GridBox = function (_React$Component) {
+  _inherits(GridBox, _React$Component);
+
+  function GridBox() {
+    _classCallCheck(this, GridBox);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(GridBox).apply(this, arguments));
+  }
+
+  _createClass(GridBox, [{
+    key: 'render',
+    value: function render() {
+      console.log(_gridBoxContent2.default);
+      return _react2.default.createElement(
+        'div',
+        { style: _ui_styles_epic.UiStyle.styles.gridBox },
+        _react2.default.createElement(_gridBoxHeader2.default, { text: this.props.text }),
+        _react2.default.createElement(
+          _gridBoxBody2.default,
+          null,
+          _react2.default.createElement(
+            _gridBoxContent2.default,
+            null,
+            this.props.children
+          )
+        )
+      );
+    }
+  }]);
+
+  return GridBox;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(GridBox);
+
+},{"./grid-box-body":255,"./grid-box-content":256,"./grid-box-header":257,"./ui_styles_epic":266,"radium":36,"react":253}],259:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GridRow = function (_React$Component) {
+  _inherits(GridRow, _React$Component);
+
+  function GridRow() {
+    _classCallCheck(this, GridRow);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(GridRow).apply(this, arguments));
+  }
+
+  _createClass(GridRow, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { style: _ui_styles_epic.UiStyle.styles.gridRow },
+        this.props.children
+      );
+    }
+  }]);
+
+  return GridRow;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(GridRow);
+
+},{"./ui_styles_epic":266,"radium":36,"react":253}],260:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Grid = function (_React$Component) {
+  _inherits(Grid, _React$Component);
+
+  function Grid() {
+    _classCallCheck(this, Grid);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Grid).apply(this, arguments));
+  }
+
+  _createClass(Grid, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { style: _ui_styles_epic.UiStyle.styles.grid },
+        this.props.children
+      );
+    }
+  }]);
+
+  return Grid;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(Grid);
+
+},{"./ui_styles_epic":266,"radium":36,"react":253}],261:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _radium = require("radium");
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _gridRow = require("./grid-row");
+
+var _gridRow2 = _interopRequireDefault(_gridRow);
+
+var _gridBox = require("./grid-box");
+
+var _gridBox2 = _interopRequireDefault(_gridBox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 //import NavContainer from './nav-container';
-//import Grid from './grid';
-//import GridBox from './grid-box';
-//import GridBoxHeader from './grid-box-header';
 
 var Index = function (_React$Component) {
   _inherits(Index, _React$Component);
@@ -26430,13 +26824,62 @@ var Index = function (_React$Component) {
   }
 
   _createClass(Index, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      console.log(_stage2.default);
       return _react2.default.createElement(
-        'div',
+        "div",
         null,
-        _react2.default.createElement(_stage2.default, null)
+        _react2.default.createElement(
+          _gridRow2.default,
+          null,
+          _react2.default.createElement(
+            _gridBox2.default,
+            { text: "Title 1" },
+            _react2.default.createElement(
+              "p",
+              null,
+              "Title 1 content"
+            )
+          ),
+          _react2.default.createElement(
+            _gridBox2.default,
+            { text: "Title 2" },
+            _react2.default.createElement(
+              "p",
+              null,
+              "Title 2 content"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              "Title 2 content"
+            )
+          ),
+          _react2.default.createElement(
+            _gridBox2.default,
+            { text: "Title 3" },
+            _react2.default.createElement(
+              "p",
+              null,
+              "Title 3 content"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              "Title 3 content"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              "Title 3 content"
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _gridRow2.default,
+          null,
+          _react2.default.createElement(_gridBox2.default, { text: "Vehicles" })
+        )
       );
     }
   }]);
@@ -26446,7 +26889,127 @@ var Index = function (_React$Component) {
 
 exports.default = (0, _radium2.default)(Index);
 
-},{"./stage":257,"radium":36,"react":253}],256:[function(require,module,exports){
+},{"./grid-box":258,"./grid-row":259,"radium":36,"react":253}],262:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+var _navItem = require('./nav-item');
+
+var _navItem2 = _interopRequireDefault(_navItem);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NavContainer = function (_React$Component) {
+  _inherits(NavContainer, _React$Component);
+
+  function NavContainer() {
+    _classCallCheck(this, NavContainer);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(NavContainer).apply(this, arguments));
+  }
+
+  _createClass(NavContainer, [{
+    key: 'render',
+    value: function render() {
+      var tabs = this.props.tabs.map(function (T) {
+        return _react2.default.createElement(_navItem2.default, { key: T.text, valid: T.valid, labelText: T.text, route: T.route });
+      });
+      return _react2.default.createElement(
+        'ul',
+        { style: _ui_styles_epic.UiStyle.styles.navContainer },
+        tabs
+      );
+    }
+  }]);
+
+  return NavContainer;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(NavContainer);
+
+},{"./nav-item":263,"./ui_styles_epic":266,"radium":36,"react":253}],263:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ui_styles_epic = require('./ui_styles_epic');
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NavItem = function (_React$Component) {
+  _inherits(NavItem, _React$Component);
+
+  function NavItem() {
+    _classCallCheck(this, NavItem);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(NavItem).apply(this, arguments));
+  }
+
+  _createClass(NavItem, [{
+    key: 'render',
+    value: function render() {
+      var klasses = [_ui_styles_epic.UiStyle.styles.navItem];
+      console.log(_typeof(this.props.valid));
+      if (typeof this.props.valid != 'undefined') {
+        var add = this.props.valid ? _ui_styles_epic.UiStyle.styles.isValid : _ui_styles_epic.UiStyle.styles.isInvalid;
+        klasses.push(add);
+        console.log(klasses);
+      }
+      return _react2.default.createElement(
+        'li',
+        { style: klasses },
+        this.props.labelText
+      );
+    }
+  }]);
+
+  return NavItem;
+}(_react2.default.Component);
+
+exports.default = (0, _radium2.default)(NavItem);
+
+},{"./ui_styles_epic":266,"radium":36,"react":253}],264:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26501,7 +27064,7 @@ var NotFoundPage = function (_React$Component) {
 
 exports.default = NotFoundPage;
 
-},{"react":253}],257:[function(require,module,exports){
+},{"react":253}],265:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26538,15 +27101,10 @@ var Stage = function (_React$Component) {
   _createClass(Stage, [{
     key: 'render',
     value: function render() {
-      console.log(_ui_styles_epic.UiStyle);
       return _react2.default.createElement(
         'div',
-        null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Test'
-        )
+        { style: _ui_styles_epic.UiStyle.styles.stage },
+        this.props.children
       );
     }
   }]);
@@ -26556,7 +27114,7 @@ var Stage = function (_React$Component) {
 
 exports.default = Stage;
 
-},{"./ui_styles_epic":258,"react":253}],258:[function(require,module,exports){
+},{"./ui_styles_epic":266,"react":253}],266:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26570,7 +27128,8 @@ var UiStyle = {
     "navContainer": {
       display: "flex",
       flexDirection: "row",
-      margin: "0 -5px 10px"
+      margin: "0 -5px 10px",
+      paddingLeft: "0px"
     },
     "navItem": {
       flex: 1,
@@ -26578,10 +27137,32 @@ var UiStyle = {
       padding: "8px 4px 7px",
       textAlign: "center",
       margin: "0 5px",
-      borderBottom: "2px solid transparent"
+      borderBottom: "2px solid transparent",
+      ':hover': {
+        backgroundColor: "#00b3e6",
+        color: "#fff"
+      }
+    },
+    "isValid": {
+      borderBottomColor: "#00b3e6"
+    },
+    "isInvalid": {
+      borderBottomColor: "#f00"
+    },
+    "grid": {
+      margin: "0 -5px"
+    },
+    "gridRow": {
+      display: "flex",
+      flex: 1,
+      flexDirection: "row",
+      position: "relative"
     },
     "gridBox": {
-      flex: 1
+      display: "flex",
+      flex: 1,
+      flexDirection: "column",
+      position: "relative"
     },
     "gridBoxHeader": {
       margin: "0 5px 6px",
@@ -26595,9 +27176,12 @@ var UiStyle = {
       fontSize: "107.1428%"
     },
     'gridBoxBody': {
-      flex: 1
+      display: "flex",
+      flex: 1,
+      margin: "0 5px 8px"
     },
     "gridBoxContent": {
+      flex: 1,
       border: "1px solid #aaa",
       padding: "4px"
     },
@@ -26623,6 +27207,9 @@ var StyleTags = [{
     body: {
       margin: "0px",
       fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif'
+    },
+    "*, *:before, *:after": {
+      boxSizing: "inherit"
     }
   }
 }, {
@@ -26691,7 +27278,7 @@ var StyleTags = [{
 exports.UiStyle = UiStyle;
 exports.StyleTags = StyleTags;
 
-},{}],259:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -26716,7 +27303,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _routes2.default
 ), document.getElementById('app'));
 
-},{"./routes":260,"react":253,"react-dom":71,"react-router":91}],260:[function(require,module,exports){
+},{"./routes":268,"react":253,"react-dom":71,"react-router":91}],268:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26752,4 +27339,4 @@ var routes = _react2.default.createElement(
 
 exports.default = routes;
 
-},{"./components/app":254,"./components/index":255,"./components/notFoundPage":256,"react":253,"react-router":91}]},{},[259]);
+},{"./components/app":254,"./components/index":261,"./components/notFoundPage":264,"react":253,"react-router":91}]},{},[267]);

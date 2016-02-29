@@ -1,15 +1,15 @@
 import React from 'react';
 import {UiStyle} from './ui_styles_epic';
-//import Radium from 'radium';
+import Radium from 'radium';
 
-class Stage extends React.Component{
+class GridRow extends React.Component{
   render(){
     return (
-      <div style={UiStyle.styles.stage}>
+      <div style={UiStyle.styles.gridRow}>
         {this.props.children}
       </div>
     );
   }
 }
 
-export default Stage;
+export default Radium(GridRow);

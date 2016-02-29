@@ -6,7 +6,8 @@ var UiStyle = {
     "navContainer":{
       display: "flex",
       flexDirection: "row",
-      margin: "0 -5px 10px"
+      margin: "0 -5px 10px",
+      paddingLeft: "0px"
     },
     "navItem":{
       flex: 1,
@@ -14,10 +15,32 @@ var UiStyle = {
       padding: "8px 4px 7px",
       textAlign: "center",
       margin: "0 5px",
-      borderBottom: "2px solid transparent"
+      borderBottom: "2px solid transparent",
+      ':hover':{
+        backgroundColor:"#00b3e6",
+        color: "#fff"
+      }
+    },
+    "isValid":{
+      borderBottomColor:"#00b3e6"
+    },
+    "isInvalid":{
+      borderBottomColor: "#f00"
+    },
+    "grid":{
+      margin: "0 -5px"
+    },
+    "gridRow":{
+      display: "flex",
+      flex: 1,
+      flexDirection: "row",
+      position: "relative"
     },
     "gridBox":{
-      flex:1
+      display: "flex",
+      flex: 1,
+      flexDirection: "column",
+      position: "relative"
     },
     "gridBoxHeader":{
       margin: "0 5px 6px",
@@ -31,9 +54,12 @@ var UiStyle = {
       fontSize: "107.1428%"
     },
     'gridBoxBody':{
-      flex:1
+      display: "flex",
+      flex: 1,
+      margin: "0 5px 8px"
     },
     "gridBoxContent":{
+      flex: 1,
       border: "1px solid #aaa",
       padding: "4px"
     },
@@ -60,6 +86,9 @@ var StyleTags = [
       body:{
         margin:"0px",
         fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif'
+      },
+      "*, *:before, *:after":{
+        boxSizing: "inherit"
       }
     }
   },
